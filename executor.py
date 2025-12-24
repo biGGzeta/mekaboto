@@ -174,7 +174,8 @@ class OrderExecutor:
                 'positionSide': stop_side,
                 'stopPrice': plan['stop_loss'],
                 'quantity': int(plan['contracts']),
-                'closePosition': False,
+                'closePosition': True,      # cierra toda la posición
+                'reduceOnly': True,         # evita invertir/sobreapilar
                 'timestamp': int(time.time() * 1000),
                 'recvWindow': 5000
             }
@@ -224,6 +225,7 @@ class OrderExecutor:
                 'stopPrice': plan['take_profit'],
                 'quantity': int(plan['contracts_partial_tp']),
                 'closePosition': False,
+                'reduceOnly': True,         # evita abrir/invertir
                 'timestamp': int(time.time() * 1000),
                 'recvWindow': 5000
             }
@@ -428,7 +430,8 @@ class OrderExecutor:
                 'type': 'STOP_MARKET',
                 'positionSide': position_side,
                 'stopPrice': new_sl_price,
-                'closePosition': True,  # Cierra toda la posición
+                'closePosition': True,      # cierra toda la posición
+                'reduceOnly': True,         # evita invertir
                 'timestamp': int(time.time() * 1000),
                 'recvWindow': 5000
             }
